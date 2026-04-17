@@ -1,0 +1,4 @@
+PyQt6
+qfluentwidgets
+pymongo
+pyinstaller
