@@ -1,6 +1,7 @@
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QDoubleValidator
 from qfluentwidgets import (MessageBoxBase, SubtitleLabel, LineEdit,
-                             TextEdit, DoubleValidator)
+                             TextEdit)
 
 class ProductDialog(MessageBoxBase):
     def __init__(self, parent=None, product=None):
