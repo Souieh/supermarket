@@ -34,6 +34,7 @@ class LauncherWindow(QWidget):
         super().__init__()
         self.setWindowTitle("Supermarket Launcher - نظام السوبر ماركت")
         self.resize(800, 500)
+        self.setStyleSheet("background-color: #f3f3f3;")
         self.layout = QVBoxLayout(self)
         self.layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 

@@ -66,8 +66,8 @@ class SupermarketApp:
     def open_settings(self):
         dialog = ConfigDialog()
         if dialog.exec():
-            host, port, db_name = dialog.get_config()
-            Database().save_config(host, port, db_name)
+            host, port, db_name, user, password = dialog.get_config()
+            Database().save_config(host, port, db_name, user, password)
             if self.launcher:
                 self.launcher.check_connection()
 
