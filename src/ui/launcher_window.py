@@ -1,4 +1,4 @@
-from PyQt6.QtCore import Qt, QSize
+from PyQt6.QtCore import Qt, QSize, pyqtSignal
 from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton as QPush
 from qfluentwidgets import (SubtitleLabel, PrimaryPushButton, PushButton,
                              FluentIcon as FIF, TitleLabel, CardWidget, BodyLabel)
@@ -6,7 +6,7 @@ from .config_dialog import ConfigDialog
 from ..modules.database import Database
 
 class LauncherCard(CardWidget):
-    clicked = None # We will use a custom click logic if needed, or just a button inside
+    clicked = pyqtSignal()
 
     def __init__(self, title, icon, parent=None):
         super().__init__(parent)
@@ -26,10 +26,11 @@ class LauncherCard(CardWidget):
         self.setFixedSize(200, 200)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
-    def mousePressEvent(self, event):
-        super().mousePressEvent(event)
-        # Handle card click by delegating to btn if desired, or just use the card click
-        pass
+        self.btn.clicked.connect(self.clicked.emit)
+
+    def mouseReleaseEvent(self, event):
+        super().mouseReleaseEvent(event)
+        self.clicked.emit()
 
 class LauncherWindow(QWidget):
     def __init__(self):

@@ -19,10 +19,10 @@ class SupermarketApp:
 
     def show_launcher(self):
         self.launcher = LauncherWindow()
-        # Connect internal buttons of cards
-        self.launcher.adminCard.btn.clicked.connect(self.open_admin)
-        self.launcher.cashierCard.btn.clicked.connect(self.open_cashier)
-        self.launcher.settingsCard.btn.clicked.connect(self.open_settings)
+        # Connect cards directly
+        self.launcher.adminCard.clicked.connect(self.open_admin)
+        self.launcher.cashierCard.clicked.connect(self.open_cashier)
+        self.launcher.settingsCard.clicked.connect(self.open_settings)
         self.launcher.show()
 
     def open_admin(self):
