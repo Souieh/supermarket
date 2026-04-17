@@ -1,6 +1,6 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout
-from qfluentwidgets import SubtitleLabel, CardWidget, BodyLabel, StrongBodyLabel, FluentIcon as FIF
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QSpacerItem, QSizePolicy
+from qfluentwidgets import SubtitleLabel, CardWidget, BodyLabel, StrongBodyLabel, FluentIcon as FIF, PushButton
 from ..modules.sale import Sale
 
 from qfluentwidgets import IconWidget
@@ -35,7 +35,43 @@ class DashboardPage(QWidget):
         self.grid = QGridLayout()
         self.layout.addLayout(self.grid)
 
+        self.layout.addSpacing(40)
+        self.shortcutsLabel = SubtitleLabel("إجراءات سريعة / Quick Actions", self)
+        self.layout.addWidget(self.shortcutsLabel)
+
+        self.shortcutsLayout = QHBoxLayout()
+        self.layout.addLayout(self.shortcutsLayout)
+
+        self.btnAddProduct = PushButton(FIF.ADD, "إضافة منتج / Add Product")
+        self.btnRecordPurchase = PushButton(FIF.BASKETBALL, "تسجيل شراء / Record Purchase")
+        self.btnViewSales = PushButton(FIF.SHOPPING_CART, "عرض المبيعات / View Sales")
+        self.btnManageCategories = PushButton(FIF.MENU, "إدارة الفئات / Categories")
+
+        self.shortcutsLayout.addWidget(self.btnAddProduct)
+        self.shortcutsLayout.addWidget(self.btnRecordPurchase)
+        self.shortcutsLayout.addWidget(self.btnViewSales)
+        self.shortcutsLayout.addWidget(self.btnManageCategories)
+        self.shortcutsLayout.addStretch(1)
+
+        self.setup_shortcuts()
         self.refresh_stats()
+
+    def setup_shortcuts(self):
+        self.btnAddProduct.clicked.connect(lambda: self.switch_to_page("ProductPage"))
+        self.btnRecordPurchase.clicked.connect(lambda: self.switch_to_page("PurchasePage"))
+        self.btnViewSales.clicked.connect(lambda: self.switch_to_page("SalesPage"))
+        self.btnManageCategories.clicked.connect(lambda: self.switch_to_page("CategoryPage"))
+
+    def switch_to_page(self, object_name):
+        window = self.window()
+        if hasattr(window, 'navigationInterface'):
+            # Find the interface by object name
+            for widget in window.stackedWidget.widgets():
+                if widget.objectName() == object_name:
+                    window.stackedWidget.setCurrentWidget(widget)
+                    # Update navigation selection visually
+                    window.navigationInterface.setCurrentItem(widget.objectName())
+                    break
 
     def refresh_stats(self):
         try:

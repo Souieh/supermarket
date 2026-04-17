@@ -6,6 +6,7 @@ from .product_page import ProductPage
 from .sales_page import SalesPage
 from .dashboard_page import DashboardPage
 from .category_page import CategoryPage
+from .purchase_page import PurchasePage
 
 class AdminWindow(FluentWindow):
     switchToCashier = pyqtSignal()
@@ -20,6 +21,7 @@ class AdminWindow(FluentWindow):
         self.dashboardPage = DashboardPage(self)
         self.categoryPage = CategoryPage(self)
         self.productPage = ProductPage(self)
+        self.purchasePage = PurchasePage(self)
         self.salesPage = SalesPage(self)
 
         self.init_navigation()
@@ -28,6 +30,7 @@ class AdminWindow(FluentWindow):
         self.addSubInterface(self.dashboardPage, FIF.HOME, "لوحة التحكم (Dashboard)")
         self.addSubInterface(self.categoryPage, FIF.MENU, "الفئات (Categories)")
         self.addSubInterface(self.productPage, FIF.APPLICATION, "المنتجات (Products)")
+        self.addSubInterface(self.purchasePage, FIF.BASKETBALL, "المشتريات (Purchases)")
         self.addSubInterface(self.salesPage, FIF.SHOPPING_CART, "المبيعات (Sales)")
 
         # Switch to Cashier
