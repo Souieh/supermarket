@@ -1,12 +1,15 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QApplication, QVBoxLayout
-from qfluentwidgets import (MessageBoxBase, SubtitleLabel, LineEdit,
-                             PushButton, FluentIcon as FIF)
+from PyQt6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout
+from qfluentwidgets import (SubtitleLabel, LineEdit,
+                             PrimaryPushButton, PushButton, FluentIcon as FIF)
 from ..modules.database import Database
 
-class ConfigDialog(MessageBoxBase):
+class ConfigDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.setWindowTitle("إعدادات قاعدة البيانات / Database Settings")
+        self.layout = QVBoxLayout(self)
+
         self.titleLabel = SubtitleLabel("إعدادات قاعدة البيانات / Database Settings", self)
         self.hostLineEdit = LineEdit(self)
         self.portLineEdit = LineEdit(self)
@@ -27,15 +30,24 @@ class ConfigDialog(MessageBoxBase):
             self.portLineEdit.setText("27017")
             self.dbLineEdit.setText("supermarket")
 
-        self.viewLayout.addWidget(self.titleLabel)
-        self.viewLayout.addWidget(self.hostLineEdit)
-        self.viewLayout.addWidget(self.portLineEdit)
-        self.viewLayout.addWidget(self.dbLineEdit)
+        self.buttonLayout = QHBoxLayout()
+        self.yesButton = PrimaryPushButton("حفظ واتصال / Save & Connect", self)
+        self.cancelButton = PushButton("إلغاء / Cancel", self)
 
-        self.yesButton.setText("حفظ واتصال / Save & Connect")
-        self.cancelButton.setText("إلغاء / Cancel")
+        self.yesButton.clicked.connect(self.accept)
+        self.cancelButton.clicked.connect(self.reject)
 
-        self.widget.setMinimumWidth(350)
+        self.buttonLayout.addStretch(1)
+        self.buttonLayout.addWidget(self.yesButton)
+        self.buttonLayout.addWidget(self.cancelButton)
+
+        self.layout.addWidget(self.titleLabel)
+        self.layout.addWidget(self.hostLineEdit)
+        self.layout.addWidget(self.portLineEdit)
+        self.layout.addWidget(self.dbLineEdit)
+        self.layout.addLayout(self.buttonLayout)
+
+        self.setMinimumWidth(400)
 
     def validate(self):
         return (self.hostLineEdit.text() and
@@ -46,3 +58,6 @@ class ConfigDialog(MessageBoxBase):
         return (self.hostLineEdit.text(),
                 self.portLineEdit.text(),
                 self.dbLineEdit.text())
+
+    def exec(self):
+        return super().exec() == QDialog.DialogCode.Accepted
