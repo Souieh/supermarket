@@ -1,18 +1,27 @@
-.PHONY: install run test build clean
+VENV = venv
+PYTHON = $(VENV)/bin/python3
+PIP = $(VENV)/bin/pip
 
-install:
-	pip install -r requirements.txt
+.PHONY: venv install run test build clean
+
+venv:
+	python3 -m venv $(VENV)
+	$(PIP) install --upgrade pip
+
+install: venv
+	$(PIP) install -r requirements.txt
 
 run:
-	python3 main.py
+	$(PYTHON) main.py
 
 test:
-	python3 test_logic.py
+	$(PYTHON) test_logic.py
 
 build:
-	pyinstaller --onefile --windowed --add-data "src:src" main.py
+	$(PYTHON) -m PyInstaller --onefile --windowed --add-data "src:src" main.py
 
 clean:
+	rm -rf $(VENV)
 	rm -rf build/
 	rm -rf dist/
 	rm -f *.spec

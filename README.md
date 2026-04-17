@@ -18,11 +18,18 @@ A modern desktop application for supermarket management built with Python, PyQt6
 - Python 3.10+
 - MongoDB (Running locally or accessible via network)
 
-## Installation
+## Installation & Setup
 
-1. Clone the repository.
-2. Install the required dependencies:
+We recommend using a virtual environment (`venv`):
+
+1. **Create and setup the virtual environment**:
    ```bash
+   make install
+   ```
+   *Alternatively, manually:*
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    pip install -r requirements.txt
    ```
 
@@ -30,13 +37,17 @@ A modern desktop application for supermarket management built with Python, PyQt6
 
 ### Running the Application
 ```bash
-python main.py
+make run
+```
+*Or manually:*
+```bash
+./venv/bin/python main.py
 ```
 
 ### Building the Executable
 To package the application into a single executable:
 ```bash
-pyinstaller --onefile --windowed --add-data "src:src" main.py
+make build
 ```
 
 ## Project Structure
@@ -48,5 +59,5 @@ pyinstaller --onefile --windowed --add-data "src:src" main.py
 ## Testing
 Run the logic tests to verify core functionality:
 ```bash
-python test_logic.py
+make test
 ```
