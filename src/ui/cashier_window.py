@@ -1,8 +1,9 @@
 from PyQt6.QtCore import Qt, QSize
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTableWidgetItem, QHeaderView, QGridLayout
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTableWidgetItem, QHeaderView, QGridLayout, QScrollArea
 from qfluentwidgets import (SubtitleLabel, TableWidget, LineEdit, PushButton,
                              FluentIcon as FIF, InfoBar, StrongBodyLabel, TitleLabel)
 from ..modules.product import Product
+from ..modules.category import Category
 from ..modules.sale import Sale
 from ..modules.receipt import Receipt
 
@@ -30,6 +31,34 @@ class CashierWindow(QWidget):
         self.cartTable.setStyleSheet("font-size: 16px;")
 
         self.leftLayout.addWidget(self.titleLabel)
+
+        # Selection Panel (Categories and Products)
+        self.selectionPanel = QWidget(self)
+        self.selectionPanel.setFixedHeight(400)
+        self.selectionLayout = QHBoxLayout(self.selectionPanel)
+        self.selectionLayout.setContentsMargins(0, 0, 0, 0)
+
+        # Category Selection
+        self.categoryArea = QScrollArea(self)
+        self.categoryArea.setFixedWidth(180)
+        self.categoryArea.setWidgetResizable(True)
+        self.categoryWidget = QWidget()
+        self.categoryLayout = QVBoxLayout(self.categoryWidget)
+        self.categoryLayout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.categoryArea.setWidget(self.categoryWidget)
+
+        # Product Selection
+        self.productArea = QScrollArea(self)
+        self.productArea.setWidgetResizable(True)
+        self.productWidget = QWidget()
+        self.productLayout = QGridLayout(self.productWidget)
+        self.productLayout.setAlignment(Qt.AlignmentFlag.AlignTop)
+        self.productArea.setWidget(self.productWidget)
+
+        self.selectionLayout.addWidget(self.categoryArea)
+        self.selectionLayout.addWidget(self.productArea)
+
+        self.leftLayout.addWidget(self.selectionPanel)
         self.leftLayout.addWidget(self.cartTable)
 
         # Right side: Controls
@@ -78,6 +107,41 @@ class CashierWindow(QWidget):
         self.layout.addWidget(self.rightPanel)
 
         self.cart_items = []
+        self.load_categories()
+
+    def load_categories(self):
+        # Clear category layout
+        while self.categoryLayout.count():
+            item = self.categoryLayout.takeAt(0)
+            if item.widget():
+                item.widget().deleteLater()
+
+        # All button
+        btn = PushButton("الكل / All")
+        btn.clicked.connect(lambda: self.load_products())
+        self.categoryLayout.addWidget(btn)
+
+        categories = Category.get_all_categories()
+        for cat in categories:
+            name = cat["name"]
+            btn = PushButton(name)
+            btn.clicked.connect(lambda ch, n=name: self.load_products(n))
+            self.categoryLayout.addWidget(btn)
+
+        self.load_products()
+
+    def load_products(self, category=None):
+        # Clear product layout
+        while self.productLayout.count():
+            item = self.productLayout.takeAt(0)
+            if item.widget():
+                item.widget().deleteLater()
+
+        products = Product.get_all_products(category=category)
+        for i, p in enumerate(products):
+            btn = TouchButton(f"{p['name']}\n{p['price']:.2f}")
+            btn.clicked.connect(lambda ch, prod=p: self.add_item(prod))
+            self.productLayout.addWidget(btn, i // 4, i % 4)
 
     def numpad_click(self, val):
         if val == 'C':
