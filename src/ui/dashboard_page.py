@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QGridLayout
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout
 from qfluentwidgets import SubtitleLabel, CardWidget, BodyLabel, StrongBodyLabel, FluentIcon as FIF
 from ..modules.sale import Sale
 
