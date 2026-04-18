@@ -17,9 +17,10 @@ def seed():
         print(f"Error: {msg}. Please ensure your database config is correct.")
         return
 
-    # 1. Create Default Admin User
+    # 1. Create Default Users
     print("Seeding users...")
     User.create_user("admin", "admin", role="admin")
+    User.create_user("cashier", "cashier", role="cashier")
 
     # 2. Create Categories
     print("Seeding categories...")
