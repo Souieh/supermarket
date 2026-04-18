@@ -10,8 +10,8 @@ class LauncherCard(CardWidget):
 
     def __init__(self, title, icon, parent=None):
         super().__init__(parent)
-        self.layout = QVBoxLayout(self)
-        self.layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.mainLayout = QVBoxLayout(self)
+        self.mainLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.btn = PushButton(icon, "", self)
         self.btn.setFixedSize(100, 100)
@@ -21,8 +21,8 @@ class LauncherCard(CardWidget):
         self.titleLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.titleLabel.setStyleSheet("font-size: 16px; font-weight: bold; color: black;")
 
-        self.layout.addWidget(self.btn)
-        self.layout.addWidget(self.titleLabel)
+        self.mainLayout.addWidget(self.btn)
+        self.mainLayout.addWidget(self.titleLabel)
         self.setFixedSize(200, 200)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
@@ -35,13 +35,13 @@ class LauncherWindow(QWidget):
         self.setWindowTitle("نظام السوبر ماركت")
         self.resize(800, 500)
         self.setStyleSheet("background-color: #f3f3f3;")
-        self.layout = QVBoxLayout(self)
-        self.layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.mainLayout = QVBoxLayout(self)
+        self.mainLayout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.title = TitleLabel("نظام إدارة السوبر ماركت", self)
         self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.layout.addWidget(self.title)
-        self.layout.addSpacing(40)
+        self.mainLayout.addWidget(self.title)
+        self.mainLayout.addSpacing(40)
 
         self.cardsLayout = QHBoxLayout()
         self.adminCard = LauncherCard("الإدارة", FIF.APPLICATION, self)
@@ -51,16 +51,16 @@ class LauncherWindow(QWidget):
         self.cardsLayout.addWidget(self.adminCard)
         self.cardsLayout.addWidget(self.cashierCard)
         self.cardsLayout.addWidget(self.settingsCard)
-        self.layout.addLayout(self.cardsLayout)
+        self.mainLayout.addLayout(self.cardsLayout)
 
         self.statusLabel = BodyLabel("", self)
         self.statusLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.layout.addSpacing(20)
-        self.layout.addWidget(self.statusLabel)
+        self.mainLayout.addSpacing(20)
+        self.mainLayout.addWidget(self.statusLabel)
 
-        self.layout.addStretch(1)
+        self.mainLayout.addStretch(1)
         self.githubLabel = HyperlinkLabel(QUrl("https://github.com/Souieh/supermarket-si"), "GitHub: Souieh", self)
-        self.layout.addWidget(self.githubLabel, 0, Qt.AlignmentFlag.AlignCenter)
+        self.mainLayout.addWidget(self.githubLabel, 0, Qt.AlignmentFlag.AlignCenter)
 
         self.check_connection()
 
