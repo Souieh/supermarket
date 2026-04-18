@@ -92,14 +92,11 @@ class ProductBrowser(QWidget):
         self.load_forgot_foods()
 
     def load_forgot_foods(self):
-        # Avoid duplicate section
-        if hasattr(self, "forgot_label"):
-            return
-        self.forgot_label = StrongBodyLabel("FOODS FORGOT")
-        self.forgot_label.setStyleSheet(
+        header = StrongBodyLabel("FOODS FORGOT")
+        header.setStyleSheet(
             "border-bottom: 1px solid black; margin-top: 20px;"
         )
-        self.product_layout.addWidget(self.forgot_label)
+        self.product_layout.addWidget(header)
 
         forgot_foods = [
             {"name": "Lobster Forgot", "price": 50.00},
@@ -126,5 +123,5 @@ class ProductBrowser(QWidget):
             self.product_selected.emit(product)
             self.code_edit.clear()
         else:
-            InfoBar.error("خطأ", "المنتج غير موجود", parent=self)
+            InfoBar.error("Error", "Product not found", parent=self)
             return
