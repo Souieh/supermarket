@@ -22,7 +22,7 @@ class CashierWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("واجهة الكاشير / POS Interface")
+        self.setWindowTitle("واجهة الكاشير")
         self.showMaximized()
         self.monoFont = QFont("Monospace")
         self.monoFont.setStyleHint(QFont.StyleHint.Monospace)
@@ -60,7 +60,7 @@ class CashierWindow(QWidget):
         # Item List Table
         self.cartTable = TableWidget()
         self.cartTable.setColumnCount(5)
-        self.cartTable.setHorizontalHeaderLabels(["Item Name", "Price", "QTY", "Discount", "Total"])
+        self.cartTable.setHorizontalHeaderLabels(["الاسم", "السعر", "الكمية", "الخصم", "المجموع"])
         self.cartTable.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.cartTable.setStyleSheet("font-family: Monospace; font-size: 16px;")
         self.cartTable.verticalHeader().setDefaultSectionSize(60)
@@ -71,12 +71,12 @@ class CashierWindow(QWidget):
         self.totalsLayout = QGridLayout()
         self.totalsLayout.setAlignment(Qt.AlignmentFlag.AlignRight)
 
-        self.subtotalLabel = QLabel("Subtotal    0.00")
-        self.discountLabel = QLabel("Discount    - 0.00")
-        self.taxLabel = QLabel("Tax    0.00")
-        self.inhouseLabel = QLabel("Inhouse Charge    0.00")
-        self.totalLabel = QLabel("Total Payment    0.00")
-        self.balanceLabel = QLabel("Balance    $0.00")
+        self.subtotalLabel = QLabel("المجموع الفرعي    0.00")
+        self.discountLabel = QLabel("الخصم    - 0.00")
+        self.taxLabel = QLabel("الضريبة    0.00")
+        self.inhouseLabel = QLabel("رسوم الخدمة    0.00")
+        self.totalLabel = QLabel("المجموع الكلي    0.00")
+        self.balanceLabel = QLabel("الرصيد    $0.00")
 
         labels = [self.subtotalLabel, self.discountLabel, self.taxLabel,
                   self.inhouseLabel, self.totalLabel, self.balanceLabel]
@@ -128,15 +128,16 @@ class CashierWindow(QWidget):
         self.customerGroup = QFrame()
         self.customerGroup.setFrameShape(QFrame.Shape.Box)
         self.customerLayout = QVBoxLayout(self.customerGroup)
-        self.customerTitle = QLabel("CUSTOMER")
+        self.customerTitle = QLabel("العميل")
         self.customerTitle.setFont(self.monoFont)
         self.customerLayout.addWidget(self.customerTitle)
 
         self.actionsGrid = QGridLayout()
         self.actionsGrid.setSpacing(10)
-        actions = ["DELETE ITEM", "SETTING", "PROMO", "DISCOUNT", "INHOUSE", "HOLD"]
-        for i, act in enumerate(actions):
-            btn = TouchButton(act)
+        actions = [("حذف عنصر", "DELETE ITEM"), ("الإعدادات", "SETTING"), ("عرض", "PROMO"),
+                   ("خصم", "DISCOUNT"), ("داخلي", "INHOUSE"), ("تعليق", "HOLD")]
+        for i, (text, act) in enumerate(actions):
+            btn = TouchButton(text)
             btn.setFont(self.monoFont)
             if act == "DELETE ITEM":
                 btn.clicked.connect(self.clear_cart)
@@ -157,9 +158,9 @@ class CashierWindow(QWidget):
         self.paymentLayout = QVBoxLayout(self.paymentGroup)
         self.paymentLayout.setSpacing(10)
 
-        paymentMethods = ["CASH", "CARD", "GIFT CARD", "LOYALTY"]
-        for pay in paymentMethods:
-            btn = TouchButton(pay)
+        paymentMethods = [("نقداً", "CASH"), ("بطاقة", "CARD"), ("قسيمة", "GIFT CARD"), ("ولاء", "LOYALTY")]
+        for text, pay in paymentMethods:
+            btn = TouchButton(text)
             btn.setFont(self.monoFont)
             btn.setFixedHeight(70)
             if pay == "CASH":
@@ -282,12 +283,12 @@ class CashierWindow(QWidget):
         total_payment = subtotal_sum - discount_sum + tax + inhouse
         balance = 500.00  # Example placeholder
 
-        self.subtotalLabel.setText(f"Subtotal    {subtotal_sum:10.2f}")
-        self.discountLabel.setText(f"Discount    - {discount_sum:8.2f}")
-        self.taxLabel.setText(f"Tax    {tax:13.2f}")
-        self.inhouseLabel.setText(f"Inhouse Charge    {inhouse:10.2f}")
-        self.totalLabel.setText(f"Total Payment    {total_payment:10.2f}")
-        self.balanceLabel.setText(f"Balance    ${balance:10.2f}")
+        self.subtotalLabel.setText(f"المجموع الفرعي    {subtotal_sum:10.2f}")
+        self.discountLabel.setText(f"الخصم    - {discount_sum:8.2f}")
+        self.taxLabel.setText(f"الضريبة    {tax:13.2f}")
+        self.inhouseLabel.setText(f"رسوم الخدمة    {inhouse:10.2f}")
+        self.totalLabel.setText(f"المجموع الكلي    {total_payment:10.2f}")
+        self.balanceLabel.setText(f"الرصيد    ${balance:10.2f}")
 
     def clear_cart(self):
         self.cart_items = []

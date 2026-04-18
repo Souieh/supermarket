@@ -13,16 +13,16 @@ class SalesPage(QWidget):
         self.setObjectName("SalesPage")
         self.layout = QVBoxLayout(self)
 
-        self.titleLabel = SubtitleLabel("معالجة المبيعات / Sales Processing", self)
+        self.titleLabel = SubtitleLabel("معالجة المبيعات", self)
 
         # Product Selection
         self.selectionLayout = QHBoxLayout()
         self.codeEdit = LineEdit(self)
-        self.codeEdit.setPlaceholderText("رمز المنتج / Product Code")
+        self.codeEdit.setPlaceholderText("رمز المنتج")
         self.qtyEdit = LineEdit(self)
-        self.qtyEdit.setPlaceholderText("الكمية / Qty")
+        self.qtyEdit.setPlaceholderText("الكمية")
         self.qtyEdit.setText("1")
-        self.addItemButton = PushButton(FIF.ADD, "إضافة / Add", self)
+        self.addItemButton = PushButton(FIF.ADD, "إضافة", self)
         self.addItemButton.clicked.connect(self.add_to_cart)
 
         self.selectionLayout.addWidget(self.codeEdit)
@@ -32,13 +32,13 @@ class SalesPage(QWidget):
         # Cart Table
         self.table = TableWidget(self)
         self.table.setColumnCount(4)
-        self.table.setHorizontalHeaderLabels(["المنتج (Item)", "السعر (Price)", "الكمية (Qty)", "المجموع (Total)"])
+        self.table.setHorizontalHeaderLabels(["المنتج", "السعر", "الكمية", "المجموع"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
         # Bottom Bar
         self.bottomBar = QHBoxLayout()
-        self.totalLabel = StrongBodyLabel("المجموع الكلي: 0.00 / Total: 0.00", self)
-        self.checkoutButton = PushButton(FIF.ACCEPT, "إتمام البيع / Checkout", self)
+        self.totalLabel = StrongBodyLabel("المجموع الكلي: 0.00", self)
+        self.checkoutButton = PushButton(FIF.ACCEPT, "إتمام البيع", self)
         self.checkoutButton.clicked.connect(self.checkout)
 
         self.bottomBar.addWidget(self.totalLabel)
@@ -91,7 +91,7 @@ class SalesPage(QWidget):
             self.table.setItem(row, 3, QTableWidgetItem(f"{subtotal:.2f}"))
             total += subtotal
 
-        self.totalLabel.setText(f"المجموع الكلي: {total:.2f} / Total: {total:.2f}")
+        self.totalLabel.setText(f"المجموع الكلي: {total:.2f}")
 
     def checkout(self):
         if not self.cart_items:

@@ -30,14 +30,14 @@ class DashboardPage(QWidget):
         self.setObjectName("DashboardPage")
         self.layout = QVBoxLayout(self)
 
-        self.titleLabel = SubtitleLabel("لوحة التحكم / Dashboard", self)
+        self.titleLabel = SubtitleLabel("لوحة التحكم", self)
         self.layout.addWidget(self.titleLabel)
 
         self.grid = QGridLayout()
         self.layout.addLayout(self.grid)
 
         self.layout.addSpacing(40)
-        self.shortcutsLabel = SubtitleLabel("إجراءات سريعة / Quick Actions", self)
+        self.shortcutsLabel = SubtitleLabel("إجراءات سريعة", self)
         self.layout.addWidget(self.shortcutsLabel)
 
         self.shortcutsLayout = QHBoxLayout()
@@ -45,10 +45,10 @@ class DashboardPage(QWidget):
         self.shortcutsLayout.setContentsMargins(10, 10, 10, 10)
         self.layout.addLayout(self.shortcutsLayout)
 
-        self.btnAddProduct = PushButton(FIF.ADD, "إضافة منتج / Add Product")
-        self.btnRecordPurchase = PushButton(FIF.BASKETBALL, "تسجيل شراء / Record Purchase")
-        self.btnViewSales = PushButton(FIF.SHOPPING_CART, "عرض المبيعات / View Sales")
-        self.btnManageCategories = PushButton(FIF.MENU, "إدارة الفئات / Categories")
+        self.btnAddProduct = PushButton(FIF.ADD, "إضافة منتج")
+        self.btnRecordPurchase = PushButton(FIF.BASKETBALL, "تسجيل شراء")
+        self.btnViewSales = PushButton(FIF.SHOPPING_CART, "عرض المبيعات")
+        self.btnManageCategories = PushButton(FIF.MENU, "إدارة الفئات")
 
         self.shortcutsLayout.addWidget(self.btnAddProduct)
         self.shortcutsLayout.addWidget(self.btnRecordPurchase)
@@ -89,13 +89,13 @@ class DashboardPage(QWidget):
             self.grid.itemAt(i).widget().setParent(None)
 
         self.grid.setSpacing(20)
-        self.grid.addWidget(StatCard("المنتجات / Products", str(stats["total_products"]), FIF.APPLICATION), 0, 0)
-        self.grid.addWidget(StatCard("الفئات / Categories", str(stats["total_categories"]), FIF.MENU), 0, 1)
-        self.grid.addWidget(StatCard("نفاذ المخزون / Out of Stock", str(stats["out_of_stock"]), FIF.CLOSE), 0, 2)
+        self.grid.addWidget(StatCard("المنتجات", str(stats["total_products"]), FIF.APPLICATION), 0, 0)
+        self.grid.addWidget(StatCard("الفئات", str(stats["total_categories"]), FIF.MENU), 0, 1)
+        self.grid.addWidget(StatCard("نفاذ المخزون", str(stats["out_of_stock"]), FIF.CLOSE), 0, 2)
 
-        self.grid.addWidget(StatCard("إيرادات اليوم / Daily Revenue", f"{stats['daily_revenue']:.2f}", FIF.TAG), 1, 0)
-        self.grid.addWidget(StatCard("إجمالي المبيعات / Sales", str(stats["total_sales"]), FIF.SHOPPING_CART), 1, 1)
-        self.grid.addWidget(StatCard("إجمالي المشتريات / Purchases", f"{stats['total_purchases']:.2f}", FIF.BASKETBALL), 1, 2)
+        self.grid.addWidget(StatCard("إيرادات اليوم", f"{stats['daily_revenue']:.2f}", FIF.TAG), 1, 0)
+        self.grid.addWidget(StatCard("إجمالي المبيعات", str(stats["total_sales"]), FIF.SHOPPING_CART), 1, 1)
+        self.grid.addWidget(StatCard("إجمالي المشتريات", f"{stats['total_purchases']:.2f}", FIF.BASKETBALL), 1, 2)
 
     def showEvent(self, event):
         super().showEvent(event)

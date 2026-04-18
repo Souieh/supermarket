@@ -12,15 +12,15 @@ class PurchasePage(QWidget):
         self.setObjectName("PurchasePage")
         self.layout = QVBoxLayout(self)
 
-        self.titleLabel = SubtitleLabel("سجل المشتريات / Purchase History", self)
+        self.titleLabel = SubtitleLabel("سجل المشتريات", self)
 
-        self.addButton = PushButton(FIF.ADD, "إضافة عملية شراء / Add Purchase", self)
+        self.addButton = PushButton(FIF.ADD, "إضافة عملية شراء", self)
         self.addButton.clicked.connect(self.show_add_dialog)
 
         self.table = TableWidget(self)
         self.table.setColumnCount(5)
         self.table.setHorizontalHeaderLabels([
-            "التاريخ (Date)", "المورد (Supplier)", "المنتجات (Items)", "الكمية (Qty)", "التكلفة (Cost)"
+            "التاريخ", "المورد", "المنتجات", "الكمية", "التكلفة"
         ])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 

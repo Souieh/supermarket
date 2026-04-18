@@ -12,21 +12,21 @@ class ProductPage(QWidget):
         self.setObjectName("ProductPage")
         self.layout = QVBoxLayout(self)
 
-        self.titleLabel = SubtitleLabel("إدارة المنتجات / Product Management", self)
+        self.titleLabel = SubtitleLabel("إدارة المنتجات", self)
 
         # Search and Action Bar
         self.actionBar = QHBoxLayout()
         self.searchEdit = LineEdit(self)
-        self.searchEdit.setPlaceholderText("بحث بالرمز، الاسم، أو الفئة / Search by Code, Name, or Category")
+        self.searchEdit.setPlaceholderText("بحث بالرمز، الاسم، أو الفئة")
         self.searchEdit.textChanged.connect(self.load_products)
 
-        self.addButton = PushButton(FIF.ADD, "إضافة / Add", self)
+        self.addButton = PushButton(FIF.ADD, "إضافة", self)
         self.addButton.clicked.connect(self.show_add_dialog)
 
-        self.editButton = PushButton(FIF.EDIT, "تعديل / Edit", self)
+        self.editButton = PushButton(FIF.EDIT, "تعديل", self)
         self.editButton.clicked.connect(self.show_edit_dialog)
 
-        self.deleteButton = PushButton(FIF.DELETE, "حذف / Delete", self)
+        self.deleteButton = PushButton(FIF.DELETE, "حذف", self)
         self.deleteButton.clicked.connect(self.delete_product)
 
         self.actionBar.addWidget(self.searchEdit)
@@ -38,8 +38,8 @@ class ProductPage(QWidget):
         self.table = TableWidget(self)
         self.table.setColumnCount(6)
         self.table.setHorizontalHeaderLabels([
-            "الرمز (Code)", "الاسم (Name)", "الفئة (Category)",
-            "السعر (Price)", "الكمية (Qty)", "الوصف (Description)"
+            "الرمز", "الاسم", "الفئة",
+            "السعر", "الكمية", "الوصف"
         ])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
@@ -68,11 +68,11 @@ class ProductPage(QWidget):
         if w.exec():
             data = w.get_data()
             if Product.get_product(data["code"]):
-                InfoBar.error("خطأ", "هذا الرمز موجود مسبقاً / Code already exists", parent=self)
+                InfoBar.error("خطأ", "هذا الرمز موجود مسبقاً", parent=self)
                 return
             Product.add_product(data)
             self.load_products()
-            InfoBar.success("تم", "تمت الإضافة بنجاح / Added successfully", parent=self)
+            InfoBar.success("تم", "تمت الإضافة بنجاح", parent=self)
 
     def show_edit_dialog(self):
         row = self.table.currentRow()
@@ -86,7 +86,7 @@ class ProductPage(QWidget):
             data = w.get_data()
             Product.update_product(code, data)
             self.load_products()
-            InfoBar.success("تم", "تم التحديث بنجاح / Updated successfully", parent=self)
+            InfoBar.success("تم", "تم التحديث بنجاح", parent=self)
 
     def delete_product(self):
         row = self.table.currentRow()
@@ -94,11 +94,11 @@ class ProductPage(QWidget):
             return
         code = self.table.item(row, 0).text()
 
-        w = MessageBox("تأكيد الحذف / Confirm Delete", f"هل أنت متأكد من حذف المنتج {code}؟", self.window())
-        w.yesButton.setText("نعم / Yes")
-        w.cancelButton.setText("إلغاء / Cancel")
+        w = MessageBox("تأكيد الحذف", f"هل أنت متأكد من حذف المنتج {code}؟", self.window())
+        w.yesButton.setText("نعم")
+        w.cancelButton.setText("إلغاء")
 
         if w.exec():
             Product.delete_product(code)
             self.load_products()
-            InfoBar.success("تم", "تم الحذف بنجاح / Deleted successfully", parent=self)
+            InfoBar.success("تم", "تم الحذف بنجاح", parent=self)

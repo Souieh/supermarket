@@ -49,7 +49,7 @@ class SupermarketApp:
             self.open_settings()
             return
 
-        self.login = LoginWindow(target_role="admin", title="دخول الإدارة / Admin Login")
+        self.login = LoginWindow(target_role="admin", title="دخول الإدارة")
         self.login.loginSuccess.connect(self._do_open_admin)
         self.login.show()
         if self.launcher:
@@ -72,7 +72,7 @@ class SupermarketApp:
             self.open_settings()
             return
 
-        self.login = LoginWindow(target_role="cashier", title="دخول الكاشير / Cashier Login")
+        self.login = LoginWindow(target_role="cashier", title="دخول الكاشير")
         self.login.loginSuccess.connect(self._do_open_cashier)
         self.login.show()
         if self.launcher:
@@ -85,8 +85,8 @@ class SupermarketApp:
             self.login.close()
         # Show Coming Soon message and do not open the window
         InfoBar.info(
-            title="قريباً / Coming Soon",
-            content="واجهة الكاشير قيد التطوير حالياً. / Cashier interface is under development.",
+            title="قريباً",
+            content="واجهة الكاشير قيد التطوير حالياً.",
             orient=Qt.Orientation.Horizontal,
             isClosable=True,
             position=InfoBarPosition.TOP,

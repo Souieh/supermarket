@@ -11,12 +11,12 @@ class CategoryPage(QWidget):
         self.setObjectName("CategoryPage")
         self.layout = QVBoxLayout(self)
 
-        self.titleLabel = SubtitleLabel("إدارة الفئات / Category Management", self)
+        self.titleLabel = SubtitleLabel("إدارة الفئات", self)
 
         self.actionBar = QHBoxLayout()
         self.nameEdit = LineEdit(self)
-        self.nameEdit.setPlaceholderText("اسم الفئة / Category Name")
-        self.addButton = PushButton(FIF.ADD, "إضافة / Add", self)
+        self.nameEdit.setPlaceholderText("اسم الفئة")
+        self.addButton = PushButton(FIF.ADD, "إضافة", self)
         self.addButton.clicked.connect(self.add_category)
 
         self.actionBar.addWidget(self.nameEdit)
@@ -24,10 +24,10 @@ class CategoryPage(QWidget):
 
         self.table = TableWidget(self)
         self.table.setColumnCount(1)
-        self.table.setHorizontalHeaderLabels(["الفئة (Category)"])
+        self.table.setHorizontalHeaderLabels(["الفئة"])
         self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
 
-        self.deleteButton = PushButton(FIF.DELETE, "حذف الفئة المختارة / Delete Selected", self)
+        self.deleteButton = PushButton(FIF.DELETE, "حذف الفئة المختارة", self)
         self.deleteButton.clicked.connect(self.delete_category)
 
         self.layout.addWidget(self.titleLabel)

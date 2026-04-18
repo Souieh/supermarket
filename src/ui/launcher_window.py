@@ -32,21 +32,21 @@ class LauncherCard(CardWidget):
 class LauncherWindow(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Supermarket Launcher - نظام السوبر ماركت")
+        self.setWindowTitle("نظام السوبر ماركت")
         self.resize(800, 500)
         self.setStyleSheet("background-color: #f3f3f3;")
         self.layout = QVBoxLayout(self)
         self.layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.title = TitleLabel("نظام إدارة السوبر ماركت / Supermarket System", self)
+        self.title = TitleLabel("نظام إدارة السوبر ماركت", self)
         self.title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.layout.addWidget(self.title)
         self.layout.addSpacing(40)
 
         self.cardsLayout = QHBoxLayout()
-        self.adminCard = LauncherCard("الإدارة / Admin", FIF.APPLICATION, self)
-        self.cashierCard = LauncherCard("الكاشير (قريباً) / Cashier (Soon)", FIF.SHOPPING_CART, self)
-        self.settingsCard = LauncherCard("الإعدادات / Settings", FIF.SETTING, self)
+        self.adminCard = LauncherCard("الإدارة", FIF.APPLICATION, self)
+        self.cashierCard = LauncherCard("الكاشير (قريباً)", FIF.SHOPPING_CART, self)
+        self.settingsCard = LauncherCard("الإعدادات", FIF.SETTING, self)
 
         self.cardsLayout.addWidget(self.adminCard)
         self.cardsLayout.addWidget(self.cashierCard)
@@ -64,8 +64,8 @@ class LauncherWindow(QWidget):
         db = Database()
         success, message = db.connect()
         if success:
-            self.statusLabel.setText("متصل بقاعدة البيانات / Database Connected")
+            self.statusLabel.setText("متصل بقاعدة البيانات")
             self.statusLabel.setStyleSheet("color: green; font-weight: bold;")
         else:
-            self.statusLabel.setText(f"خطأ في الاتصال: {message} / Connection Error")
+            self.statusLabel.setText(f"خطأ في الاتصال: {message}")
             self.statusLabel.setStyleSheet("color: red; font-weight: bold;")

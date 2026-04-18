@@ -9,7 +9,7 @@ from ..modules.database import Database
 class LoginWindow(QWidget):
     loginSuccess = pyqtSignal(str)  # Emits role
 
-    def __init__(self, target_role="admin", title="تسجيل دخول الإدارة / Admin Login"):
+    def __init__(self, target_role="admin", title="تسجيل دخول الإدارة"):
         super().__init__()
         self.target_role = target_role
         self.setWindowTitle(title)
@@ -23,20 +23,20 @@ class LoginWindow(QWidget):
         self.titleLabel = TitleLabel(title, self)
         self.titleLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.subtitleLabel = BodyLabel("يرجى تسجيل الدخول للمتابعة / Please login to continue", self)
+        self.subtitleLabel = BodyLabel("يرجى تسجيل الدخول للمتابعة", self)
         self.subtitleLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.userEdit = LineEdit(self)
-        self.userEdit.setPlaceholderText("اسم المستخدم / Username")
+        self.userEdit.setPlaceholderText("اسم المستخدم")
         self.userEdit.setFixedWidth(300)
         self.userEdit.setFixedHeight(40)
 
         self.passEdit = PasswordLineEdit(self)
-        self.passEdit.setPlaceholderText("كلمة المرور / Password")
+        self.passEdit.setPlaceholderText("كلمة المرور")
         self.passEdit.setFixedWidth(300)
         self.passEdit.setFixedHeight(40)
 
-        self.loginBtn = PrimaryPushButton("تسجيل الدخول / Login", self)
+        self.loginBtn = PrimaryPushButton("تسجيل الدخول", self)
         self.loginBtn.setFixedWidth(300)
         self.loginBtn.setFixedHeight(45)
         self.loginBtn.clicked.connect(self.do_login)

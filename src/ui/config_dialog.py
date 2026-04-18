@@ -6,10 +6,10 @@ from ..modules.database import Database
 class ConfigDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("إعدادات قاعدة البيانات / Database Settings")
+        self.setWindowTitle("إعدادات قاعدة البيانات")
         self.layout = QVBoxLayout(self)
 
-        self.titleLabel = SubtitleLabel("إعدادات قاعدة البيانات / Database Settings", self)
+        self.titleLabel = SubtitleLabel("إعدادات قاعدة البيانات", self)
         self.hostLineEdit = LineEdit(self)
         self.portLineEdit = LineEdit(self)
         self.dbLineEdit = LineEdit(self)
@@ -17,11 +17,11 @@ class ConfigDialog(QDialog):
         self.passLineEdit = LineEdit(self)
         self.passLineEdit.setEchoMode(LineEdit.EchoMode.Password)
 
-        self.hostLineEdit.setPlaceholderText("المضيف / Host (e.g. localhost)")
-        self.portLineEdit.setPlaceholderText("المنفذ / Port (e.g. 27017)")
-        self.dbLineEdit.setPlaceholderText("اسم قاعدة البيانات / Database Name")
-        self.userLineEdit.setPlaceholderText("اسم المستخدم / Username (Optional)")
-        self.passLineEdit.setPlaceholderText("كلمة المرور / Password (Optional)")
+        self.hostLineEdit.setPlaceholderText("المضيف (مثال: localhost)")
+        self.portLineEdit.setPlaceholderText("المنفذ (مثال: 27017)")
+        self.dbLineEdit.setPlaceholderText("اسم قاعدة البيانات")
+        self.userLineEdit.setPlaceholderText("اسم المستخدم (اختياري)")
+        self.passLineEdit.setPlaceholderText("كلمة المرور (اختياري)")
 
         # Load existing config if any
         db = Database()
@@ -37,8 +37,8 @@ class ConfigDialog(QDialog):
             self.dbLineEdit.setText("supermarket")
 
         self.buttonLayout = QHBoxLayout()
-        self.yesButton = PrimaryPushButton("حفظ واتصال / Save & Connect", self)
-        self.cancelButton = PushButton("إلغاء / Cancel", self)
+        self.yesButton = PrimaryPushButton("حفظ واتصال", self)
+        self.cancelButton = PushButton("إلغاء", self)
 
         self.yesButton.clicked.connect(self.accept)
         self.cancelButton.clicked.connect(self.reject)
@@ -74,7 +74,7 @@ class ConfigDialog(QDialog):
         if self.validate():
             super().accept()
         else:
-            self.titleLabel.setText("خطأ في البيانات / Invalid Data")
+            self.titleLabel.setText("خطأ في البيانات")
             self.titleLabel.setStyleSheet("color: red;")
 
     def exec(self):
