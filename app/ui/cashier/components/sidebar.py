@@ -10,12 +10,12 @@ class TotalsCard(CardWidget):
         layout = QGridLayout(self)
         layout.setAlignment(Qt.AlignmentFlag.AlignRight)
 
-        self.subtotal_label = StrongBodyLabel("Subtotal    0.00")
-        self.discount_label = StrongBodyLabel("Discount    - 0.00")
-        self.tax_label = StrongBodyLabel("Tax    0.00")
-        self.service_label = StrongBodyLabel("Service Fee    0.00")
-        self.total_label = TitleLabel("Total    0.00")
-        self.balance_label = StrongBodyLabel("Balance    $0.00")
+        self.subtotal_label = StrongBodyLabel("المجموع الفرعي    0.00")
+        self.discount_label = StrongBodyLabel("الخصم    - 0.00")
+        self.tax_label = StrongBodyLabel("الضريبة    0.00")
+        self.service_label = StrongBodyLabel("رسوم الخدمة    0.00")
+        self.total_label = TitleLabel("المجموع الكلي    0.00")
+        self.balance_label = StrongBodyLabel("الرصيد    $0.00")
 
         labels = [
             self.subtotal_label,
@@ -31,12 +31,12 @@ class TotalsCard(CardWidget):
             layout.addWidget(lbl, i, 0)
 
     def update_totals(self, totals):
-        self.subtotal_label.setText(f"Subtotal    {totals['subtotal']:10.2f}")
-        self.discount_label.setText(f"Discount    - {totals['discount']:8.2f}")
-        self.tax_label.setText(f"Tax    {totals['tax']:13.2f}")
-        self.service_label.setText(f"Service Fee    {totals['service']:10.2f}")
-        self.total_label.setText(f"Total    {totals['total']:10.2f}")
-        self.balance_label.setText(f"Balance    ${totals['balance']:10.2f}")
+        self.subtotal_label.setText(f"المجموع الفرعي    {totals['subtotal']:10.2f}")
+        self.discount_label.setText(f"الخصم    - {totals['discount']:8.2f}")
+        self.tax_label.setText(f"الضريبة    {totals['tax']:13.2f}")
+        self.service_label.setText(f"رسوم الخدمة    {totals['service']:10.2f}")
+        self.total_label.setText(f"المجموع الكلي    {totals['total']:10.2f}")
+        self.balance_label.setText(f"الرصيد    ${totals['balance']:10.2f}")
 
 
 class ActionsCard(CardWidget):

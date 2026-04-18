@@ -31,18 +31,18 @@ class ProductBrowser(QWidget):
         # Search + code row
         search_add_layout = QHBoxLayout()
         self.search_edit = SearchLineEdit()
-        self.search_edit.setPlaceholderText("Search products...")
+        self.search_edit.setPlaceholderText("بحث عن منتجات...")
         self.search_edit.setFixedHeight(50)
         setFont(self.search_edit, 20)
         self.search_edit.textChanged.connect(self.load_categories)
 
         self.code_edit = LineEdit()
-        self.code_edit.setPlaceholderText("Product code")
+        self.code_edit.setPlaceholderText("كود المنتج")
         self.code_edit.setFixedHeight(50)
         setFont(self.code_edit, 20)
         self.code_edit.returnPressed.connect(self.add_by_code)
 
-        btn_add_code = PushButton("Add by code")
+        btn_add_code = PushButton("إضافة بالكود")
         btn_add_code.setFixedHeight(50)
         btn_add_code.clicked.connect(self.add_by_code)
 
@@ -92,7 +92,7 @@ class ProductBrowser(QWidget):
         self.load_forgot_foods()
 
     def load_forgot_foods(self):
-        header = StrongBodyLabel("FOODS FORGOT")
+        header = StrongBodyLabel("منتجات منسية")
         header.setStyleSheet(
             "border-bottom: 1px solid black; margin-top: 20px;"
         )
@@ -123,5 +123,5 @@ class ProductBrowser(QWidget):
             self.product_selected.emit(product)
             self.code_edit.clear()
         else:
-            InfoBar.error("Error", "Product not found", parent=self)
+            InfoBar.error("خطأ", "المنتج غير موجود", parent=self)
             return

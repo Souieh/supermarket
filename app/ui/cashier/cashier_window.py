@@ -21,7 +21,7 @@ class CashierWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("Cashier Interface")
+        self.setWindowTitle("واجهة الصَرّاف")
         self.showMaximized()
         mono_font = QFont("Monospace")
         mono_font.setStyleHint(QFont.StyleHint.Monospace)
@@ -69,11 +69,11 @@ class CashierWindow(QWidget):
         self.actions_card = ActionsCard(self)
         # Define actions with slots
         actions = [
-            ("Remove Item", self.clear_cart),
-            ("Discount", self.apply_discount),
-            ("In-house", self.toggle_inhouse),
-            ("Hold", self.returnToLauncher.emit),
-            ("Settings", self.switchToAdmin.emit),
+            ("حذف عنصر", self.clear_cart),
+            ("خصم", self.apply_discount),
+            ("داخلي", self.toggle_inhouse),
+            ("تعليق", self.returnToLauncher.emit),
+            ("إعدادات", self.switchToAdmin.emit),
         ]
         for i, (text, slot) in enumerate(actions):
             self.actions_card.add_action(text, slot, i // 2, i % 2)
@@ -81,10 +81,10 @@ class CashierWindow(QWidget):
 
         self.payment_card = PaymentCard(self)
         payments = [
-            ("Cash", self.checkout),
-            ("Card", self.card_payment),
-            ("Voucher", self.gift_payment),
-            ("Loyalty", self.loyalty_payment),
+            ("نقداً", self.checkout),
+            ("بطاقة", self.card_payment),
+            ("قسيمة", self.gift_payment),
+            ("ولاء", self.loyalty_payment),
         ]
         for text, slot in payments:
             self.payment_card.add_payment_method(text, slot)
@@ -109,7 +109,7 @@ class CashierWindow(QWidget):
         try:
             receipt_id = sale.process_sale()
             filename = Receipt.generate(sale.to_dict())
-            InfoBar.success("Success", f"Sale processed successfully. Receipt: {receipt_id}", parent=self)
+            InfoBar.success("تم", f"تم البيع بنجاح. فاتورة: {receipt_id}", parent=self)
             self.cart_model.clear()
             # Open receipt file
             try:
@@ -126,20 +126,20 @@ class CashierWindow(QWidget):
             except Exception:
                 pass
         except Exception as e:
-            InfoBar.error("Error", str(e), parent=self)
+            InfoBar.error("خطأ", str(e), parent=self)
 
     # Placeholders
     def apply_discount(self):
-        InfoBar.info("Discount", "Discount functionality is under development", parent=self)
+        InfoBar.info("خصم", "وظيفة الخصم قيد التطوير", parent=self)
 
     def toggle_inhouse(self):
-        InfoBar.info("In-house", "Service fee functionality is under development", parent=self)
+        InfoBar.info("داخلي", "وظيفة رسوم الخدمة قيد التطوير", parent=self)
 
     def card_payment(self):
-        InfoBar.info("Card", "Card payment is under development", parent=self)
+        InfoBar.info("بطاقة", "الدفع بالبطاقة قيد التطوير", parent=self)
 
     def gift_payment(self):
-        InfoBar.info("Voucher", "Voucher payment is under development", parent=self)
+        InfoBar.info("قسيمة", "الدفع بقسيمة هدايا قيد التطوير", parent=self)
 
     def loyalty_payment(self):
-        InfoBar.info("Loyalty", "Loyalty points payment is under development", parent=self)
+        InfoBar.info("ولاء", "الدفع بنقاط الولاء قيد التطوير", parent=self)

@@ -6,7 +6,7 @@ class CartTable(TableWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setColumnCount(5)
-        self.setHorizontalHeaderLabels(["Name", "Price", "Quantity", "Discount", "Total"])
+        self.setHorizontalHeaderLabels(["الاسم", "السعر", "الكمية", "الخصم", "المجموع"])
         header = self.horizontalHeader()
         if header:
             header.setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
