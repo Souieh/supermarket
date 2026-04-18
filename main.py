@@ -1,9 +1,7 @@
 import sys
 
-from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QApplication
-from qfluentwidgets import InfoBar, InfoBarPosition
 
 from app.modules.database import Database
 from app.ui.admin.admin_window import AdminWindow
@@ -87,7 +85,7 @@ class SupermarketApp:
             self.open_settings()
             return
 
-        self.login = LoginWindow(target_role="cashier", title="دخول الكاشير")
+        self.login = LoginWindow(target_role="cashier", title="دخول الصَرّاف")
         self.login.loginSuccess.connect(self._do_open_cashier)
         self.login.returnToLauncher.connect(self.show_launcher)
         self.center_window(self.login)
@@ -104,6 +102,7 @@ class SupermarketApp:
             self.admin_win.close()
 
         from app.ui.cashier.cashier_window import CashierWindow
+
         self.cashier_win = CashierWindow()
         self.cashier_win.returnToLauncher.connect(self.show_launcher)
         self.cashier_win.switchToAdmin.connect(self.open_admin)

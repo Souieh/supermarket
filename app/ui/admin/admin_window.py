@@ -49,7 +49,7 @@ class AdminWindow(FluentWindow):
         self.navigationInterface.addItem(
             routeKey="cashier",
             icon=FIF.SHOPPING_CART,
-            text="واجهة الكاشير (قريباً)",
+            text="واجهة الصَرّاف (قريباً)",
             onClick=self.switchToCashier.emit,
             position=NavigationItemPosition.BOTTOM,
         )

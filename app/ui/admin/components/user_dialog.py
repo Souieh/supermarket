@@ -1,5 +1,4 @@
-from qfluentwidgets import (MessageBoxBase, SubtitleLabel, LineEdit,
-                            ComboBox)
+from qfluentwidgets import ComboBox, LineEdit, MessageBoxBase, SubtitleLabel
 
 
 class UserDialog(MessageBoxBase):
@@ -16,11 +15,13 @@ class UserDialog(MessageBoxBase):
         self.passEdit.setPlaceholderText("كلمة المرور")
         self.passEdit.setEchoMode(LineEdit.EchoMode.Password)
         if user:
-            self.passEdit.setPlaceholderText("اتركه فارغاً للإبقاء على كلمة المرور الحالية")
+            self.passEdit.setPlaceholderText(
+                "اتركه فارغاً للإبقاء على كلمة المرور الحالية"
+            )
 
         self.roleCombo = ComboBox(self)
         self.roleCombo.addItem("أدمن / Admin", "admin")
-        self.roleCombo.addItem("كاشير / Cashier", "cashier")
+        self.roleCombo.addItem("صَرّاف / Cashier", "cashier")
 
         if user:
             self.userEdit.setText(user["username"])
@@ -57,5 +58,5 @@ class UserDialog(MessageBoxBase):
         return {
             "username": self.userEdit.text(),
             "password": self.passEdit.text(),
-            "role": self.roleCombo.currentData()
+            "role": self.roleCombo.currentData(),
         }

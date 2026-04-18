@@ -1,7 +1,9 @@
-from PyQt6.QtCore import Qt, QSize, pyqtSignal, QUrl
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
-from qfluentwidgets import (PushButton, FluentIcon as FIF, TitleLabel,
-                            CardWidget, BodyLabel, HyperlinkLabel, MessageBox)
+from PyQt6.QtCore import QSize, Qt, QUrl, pyqtSignal
+from PyQt6.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget
+from qfluentwidgets import BodyLabel, CardWidget
+from qfluentwidgets import FluentIcon as FIF
+from qfluentwidgets import HyperlinkLabel, MessageBox, PushButton, TitleLabel
+
 from ..modules.database import Database
 
 
@@ -19,7 +21,9 @@ class LauncherCard(CardWidget):
 
         self.titleLabel = BodyLabel(title, self)
         self.titleLabel.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.titleLabel.setStyleSheet("font-size: 16px; font-weight: bold; color: black;")
+        self.titleLabel.setStyleSheet(
+            "font-size: 16px; font-weight: bold; color: black;"
+        )
 
         self.mainLayout.addWidget(self.btn)
         self.mainLayout.addWidget(self.titleLabel)
@@ -45,7 +49,7 @@ class LauncherWindow(QWidget):
 
         self.cardsLayout = QHBoxLayout()
         self.adminCard = LauncherCard("الإدارة", FIF.APPLICATION, self)
-        self.cashierCard = LauncherCard("الكاشير (قريباً)", FIF.SHOPPING_CART, self)
+        self.cashierCard = LauncherCard("الصَرّاف (قريباً)", FIF.SHOPPING_CART, self)
         self.settingsCard = LauncherCard("الإعدادات", FIF.SETTING, self)
 
         self.cardsLayout.addWidget(self.adminCard)
@@ -59,7 +63,9 @@ class LauncherWindow(QWidget):
         self.mainLayout.addWidget(self.statusLabel)
 
         self.mainLayout.addStretch(1)
-        self.githubLabel = HyperlinkLabel(QUrl("https://github.com/Souieh/supermarket-si"), "GitHub: Souieh", self)
+        self.githubLabel = HyperlinkLabel(
+            QUrl("https://github.com/Souieh/supermarket-si"), "GitHub: Souieh", self
+        )
         self.mainLayout.addWidget(self.githubLabel, 0, Qt.AlignmentFlag.AlignCenter)
 
         self.check_connection()
