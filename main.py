@@ -1,5 +1,6 @@
 import sys
 from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QFont
 from PyQt6.QtWidgets import QApplication
 from qfluentwidgets import InfoBar, InfoBarPosition
 from src.modules.database import Database
@@ -12,10 +13,18 @@ from src.ui.login_window import LoginWindow
 class SupermarketApp:
     def __init__(self):
         self.app = QApplication(sys.argv)
+        self.set_global_font()
         self.login = None
         self.launcher = None
         self.admin_win = None
         self.cashier_win = None
+
+    def set_global_font(self):
+        # Choose a UI-friendly font
+        font = QFont("Segoe UI", 10)
+        if not QFont(font).exactMatch():
+            font = QFont("DejaVu Sans", 10)
+        self.app.setFont(font)
 
     def start(self):
         self.show_launcher()
