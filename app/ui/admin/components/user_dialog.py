@@ -20,8 +20,8 @@ class UserDialog(MessageBoxBase):
             )
 
         self.roleCombo = ComboBox(self)
-        self.roleCombo.addItem("أدمن / Admin", "admin")
-        self.roleCombo.addItem("صَرّاف / Cashier", "cashier")
+        self.roleCombo.addItem("أدمن / Admin", userData="admin")
+        self.roleCombo.addItem("صَرّاف / Cashier", userData="cashier")
 
         if user:
             self.userEdit.setText(user["username"])

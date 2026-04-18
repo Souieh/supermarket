@@ -16,7 +16,7 @@ class PurchaseDialog(MessageBoxBase):
         # Load products
         self.products = Product.get_all_products()
         for p in self.products:
-            self.productCombo.addItem(f"{p['name']} ({p['code']})", p['code'])
+            self.productCombo.addItem(f"{p['name']} ({p['code']})", userData=p['code'])
 
         self.qtyEdit.setValidator(QIntValidator(1, 1000000))
         self.costEdit.setValidator(QDoubleValidator(0.0, 999999.0, 2))
