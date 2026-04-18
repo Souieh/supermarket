@@ -1,5 +1,6 @@
 from .database import Database
 
+
 class Product:
     def __init__(self, code, name, category, price, quantity, description=""):
         self.code = code

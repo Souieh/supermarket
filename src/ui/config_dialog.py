@@ -1,8 +1,7 @@
-from PyQt6.QtCore import Qt
 from PyQt6.QtWidgets import QDialog, QVBoxLayout, QHBoxLayout
-from qfluentwidgets import (SubtitleLabel, LineEdit,
-                             PrimaryPushButton, PushButton, FluentIcon as FIF)
+from qfluentwidgets import SubtitleLabel, LineEdit, PrimaryPushButton, PushButton
 from ..modules.database import Database
+
 
 class ConfigDialog(QDialog):
     def __init__(self, parent=None):

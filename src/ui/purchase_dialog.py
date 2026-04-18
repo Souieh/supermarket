@@ -1,7 +1,7 @@
-from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QDoubleValidator, QIntValidator
 from qfluentwidgets import (MessageBoxBase, SubtitleLabel, LineEdit, ComboBox)
 from ..modules.product import Product
+
 
 class PurchaseDialog(MessageBoxBase):
     def __init__(self, parent=None):

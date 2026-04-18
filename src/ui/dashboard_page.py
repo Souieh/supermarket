@@ -1,9 +1,9 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QSpacerItem, QSizePolicy
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout
 from qfluentwidgets import SubtitleLabel, CardWidget, BodyLabel, StrongBodyLabel, FluentIcon as FIF, PushButton
 from ..modules.sale import Sale
 
 from qfluentwidgets import IconWidget
+
 
 class StatCard(CardWidget):
     def __init__(self, title, value, icon, parent=None):
@@ -22,6 +22,7 @@ class StatCard(CardWidget):
 
         self.layout.addWidget(self.iconWidget)
         self.layout.addLayout(self.textLayout)
+
 
 class DashboardPage(QWidget):
     def __init__(self, parent=None):
@@ -68,7 +69,8 @@ class DashboardPage(QWidget):
         window = self.window()
         if hasattr(window, 'navigationInterface'):
             # Find the interface by object name
-            for widget in window.stackedWidget.widgets():
+            for i in range(window.stackedWidget.count()):
+                widget = window.stackedWidget.widget(i)
                 if widget.objectName() == object_name:
                     window.stackedWidget.setCurrentWidget(widget)
                     # Update navigation selection visually
@@ -78,7 +80,7 @@ class DashboardPage(QWidget):
     def refresh_stats(self):
         try:
             stats = Sale.get_dashboard_stats()
-        except:
+        except Exception:
             stats = {"total_products": 0, "out_of_stock": 0, "total_categories": 0,
                      "daily_revenue": 0, "total_sales": 0, "total_purchases": 0}
 

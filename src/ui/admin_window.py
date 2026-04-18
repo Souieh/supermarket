@@ -1,12 +1,13 @@
-from PyQt6.QtCore import Qt, QSize, pyqtSignal
+from PyQt6.QtCore import pyqtSignal
 from qfluentwidgets import (FluentWindow, NavigationItemPosition,
-                             FluentIcon as FIF)
+                            FluentIcon as FIF)
 
 from .product_page import ProductPage
 from .sales_page import SalesPage
 from .dashboard_page import DashboardPage
 from .category_page import CategoryPage
 from .purchase_page import PurchasePage
+
 
 class AdminWindow(FluentWindow):
     switchToCashier = pyqtSignal()

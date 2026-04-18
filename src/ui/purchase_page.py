@@ -1,8 +1,10 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTableWidgetItem, QHeaderView
-from qfluentwidgets import (SubtitleLabel, TableWidget, PushButton, FluentIcon as FIF, InfoBar)
+from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QTableWidgetItem,
+                             QHeaderView)
+from qfluentwidgets import (SubtitleLabel, TableWidget, PushButton,
+                            FluentIcon as FIF, InfoBar)
 from ..modules.purchase import Purchase
 from .purchase_dialog import PurchaseDialog
+
 
 class PurchasePage(QWidget):
     def __init__(self, parent=None):

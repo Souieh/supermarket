@@ -1,9 +1,9 @@
 from PyQt6.QtCore import Qt, QSize, pyqtSignal
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QPushButton as QPush
-from qfluentwidgets import (SubtitleLabel, PrimaryPushButton, PushButton,
-                             FluentIcon as FIF, TitleLabel, CardWidget, BodyLabel)
-from .config_dialog import ConfigDialog
+from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout
+from qfluentwidgets import (PushButton, FluentIcon as FIF, TitleLabel,
+                            CardWidget, BodyLabel)
 from ..modules.database import Database
+
 
 class LauncherCard(CardWidget):
     clicked = pyqtSignal()

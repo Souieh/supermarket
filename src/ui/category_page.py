@@ -1,8 +1,9 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTableWidgetItem, QHeaderView
+from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout,
+                             QTableWidgetItem, QHeaderView)
 from qfluentwidgets import (SubtitleLabel, TableWidget, LineEdit, PushButton,
-                             FluentIcon as FIF, InfoBar, MessageBox)
+                            FluentIcon as FIF, InfoBar)
 from ..modules.category import Category
+
 
 class CategoryPage(QWidget):
     def __init__(self, parent=None):
@@ -46,7 +47,8 @@ class CategoryPage(QWidget):
 
     def add_category(self):
         name = self.nameEdit.text()
-        if not name: return
+        if not name:
+            return
         if Category.add_category(name):
             self.load_categories()
             self.nameEdit.clear()
@@ -56,7 +58,8 @@ class CategoryPage(QWidget):
 
     def delete_category(self):
         row = self.table.currentRow()
-        if row < 0: return
+        if row < 0:
+            return
         name = self.table.item(row, 0).text()
         if Category.delete_category(name):
             self.load_categories()

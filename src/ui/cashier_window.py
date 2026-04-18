@@ -1,18 +1,20 @@
 from PyQt6.QtCore import Qt, QSize, pyqtSignal
 from PyQt6.QtGui import QFont
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTableWidgetItem, QHeaderView, QGridLayout, QScrollArea, QLabel, QFrame
-from qfluentwidgets import (SubtitleLabel, TableWidget, LineEdit, PushButton,
-                             FluentIcon as FIF, InfoBar, StrongBodyLabel, TitleLabel)
+from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout,
+                             QTableWidgetItem, QHeaderView, QGridLayout,
+                             QScrollArea, QLabel, QFrame)
+from qfluentwidgets import TableWidget, LineEdit, PushButton, InfoBar
 from ..modules.product import Product
-from ..modules.category import Category
 from ..modules.sale import Sale
 from ..modules.receipt import Receipt
+
 
 class TouchButton(PushButton):
     def _postInit(self):
         self.setFixedHeight(80)
         self.setIconSize(QSize(32, 32))
         self.setStyleSheet("font-size: 18px; font-weight: bold;")
+
 
 class CashierWindow(QWidget):
     switchToAdmin = pyqtSignal()
@@ -71,10 +73,10 @@ class CashierWindow(QWidget):
 
         self.subtotalLabel = QLabel("Subtotal    0.00")
         self.discountLabel = QLabel("Discount    - 0.00")
-        self.taxLabel      = QLabel("Tax    0.00")
-        self.inhouseLabel  = QLabel("Inhouse Charge    0.00")
-        self.totalLabel    = QLabel("Total Payment    0.00")
-        self.balanceLabel  = QLabel("Balance    $0.00")
+        self.taxLabel = QLabel("Tax    0.00")
+        self.inhouseLabel = QLabel("Inhouse Charge    0.00")
+        self.totalLabel = QLabel("Total Payment    0.00")
+        self.balanceLabel = QLabel("Balance    $0.00")
 
         labels = [self.subtotalLabel, self.discountLabel, self.taxLabel,
                   self.inhouseLabel, self.totalLabel, self.balanceLabel]
@@ -187,7 +189,8 @@ class CashierWindow(QWidget):
             self.selectionLayout.addWidget(header)
 
             # Products for this category
-            products = Product.get_all_products(search_query=search_query) # Intentional: same products for all
+            # Intentional: same products for all
+            products = Product.get_all_products(search_query=search_query)
             for p in products:
                 btn = TouchButton(f"{p['name']} {p['price']:.2f} - 12g")
                 btn.setFont(self.monoFont)
@@ -229,7 +232,8 @@ class CashierWindow(QWidget):
 
     def add_by_code(self):
         code = self.codeEdit.text()
-        if not code: return
+        if not code:
+            return
         product = Product.get_product(code)
         if product:
             self.add_item(product)
@@ -273,10 +277,10 @@ class CashierWindow(QWidget):
             subtotal_sum += (price * qty)
             discount_sum += discount
 
-        tax = subtotal_sum * 0.15 # Example 15% tax
-        inhouse = 0 # Example
+        tax = subtotal_sum * 0.15  # Example 15% tax
+        inhouse = 0  # Example
         total_payment = subtotal_sum - discount_sum + tax + inhouse
-        balance = 500.00 # Example placeholder
+        balance = 500.00  # Example placeholder
 
         self.subtotalLabel.setText(f"Subtotal    {subtotal_sum:10.2f}")
         self.discountLabel.setText(f"Discount    - {discount_sum:8.2f}")
@@ -290,7 +294,8 @@ class CashierWindow(QWidget):
         self.update_table()
 
     def checkout(self):
-        if not self.cart_items: return
+        if not self.cart_items:
+            return
         total = sum(item["price"] * item["quantity"] for item in self.cart_items)
         sale = Sale(self.cart_items, total)
         try:

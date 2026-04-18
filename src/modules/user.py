@@ -1,6 +1,7 @@
 import bcrypt
 from .database import Database
 
+
 class User:
     @staticmethod
     def create_user(username, password, role="admin"):

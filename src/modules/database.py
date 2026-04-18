@@ -3,6 +3,7 @@ import os
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure, OperationFailure
 
+
 class Database:
     _instance = None
     _config_file = "config.json"

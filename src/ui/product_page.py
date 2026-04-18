@@ -1,10 +1,10 @@
-from PyQt6.QtCore import Qt
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QTableWidgetItem, QHeaderView
+from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout,
+                             QTableWidgetItem, QHeaderView)
 from qfluentwidgets import (SubtitleLabel, TableWidget, LineEdit, PushButton,
-                             FluentIcon as FIF, InfoBar, InfoBarPosition,
-                             MessageBox)
+                            FluentIcon as FIF, InfoBar, MessageBox)
 from ..modules.product import Product
 from .product_dialog import ProductDialog
+
 
 class ProductPage(QWidget):
     def __init__(self, parent=None):

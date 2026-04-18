@@ -1,5 +1,6 @@
 from .database import Database
 
+
 class Category:
     @staticmethod
     def add_category(name):

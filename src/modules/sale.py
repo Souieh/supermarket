@@ -2,6 +2,7 @@ from datetime import datetime
 from .database import Database
 from .product import Product
 
+
 class Sale:
     def __init__(self, items, total_amount):
         """

@@ -1,12 +1,13 @@
 from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtWidgets import QWidget, QVBoxLayout, QHBoxLayout, QLabel
+from PyQt6.QtWidgets import QWidget, QVBoxLayout
 from qfluentwidgets import (LineEdit, PasswordLineEdit, PrimaryPushButton,
-                             TitleLabel, BodyLabel, InfoBar, InfoBarPosition)
+                            TitleLabel, BodyLabel, InfoBar, InfoBarPosition)
 from ..modules.user import User
 from ..modules.database import Database
 
+
 class LoginWindow(QWidget):
-    loginSuccess = pyqtSignal(str) # Emits role
+    loginSuccess = pyqtSignal(str)  # Emits role
 
     def __init__(self):
         super().__init__()

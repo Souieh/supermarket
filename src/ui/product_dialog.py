@@ -1,7 +1,7 @@
-from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QDoubleValidator
 from qfluentwidgets import (MessageBoxBase, SubtitleLabel, LineEdit,
-                             TextEdit)
+                            TextEdit)
+
 
 class ProductDialog(MessageBoxBase):
     def __init__(self, parent=None, product=None):
@@ -31,7 +31,7 @@ class ProductDialog(MessageBoxBase):
             self.priceEdit.setText(str(product.get("price", "")))
             self.qtyEdit.setText(str(product.get("quantity", "")))
             self.descEdit.setText(product.get("description", ""))
-            self.codeEdit.setEnabled(False) # Don't allow changing code
+            self.codeEdit.setEnabled(False)  # Don't allow changing code
 
         self.viewLayout.addWidget(self.titleLabel)
         self.viewLayout.addWidget(self.codeEdit)
