@@ -21,7 +21,7 @@ class CashierWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("واجهة الكاشير")
+        self.setWindowTitle("واجهة الصَرّاف")
         self.showMaximized()
         mono_font = QFont("Monospace")
         mono_font.setStyleHint(QFont.StyleHint.Monospace)
